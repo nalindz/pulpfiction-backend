@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006212942) do
+ActiveRecord::Schema.define(:version => 20121008000947) do
+
+  create_table "blocks", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "block_number"
+    t.string   "text"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "blocks", ["block_number"], :name => "index_blocks_on_block_number"
+
+  create_table "stories", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
