@@ -1,13 +1,7 @@
 class StoriesController < ApplicationController
   def create
-    block_size = 10 # words
-    blocks = params[:text].split(" ").in_groups_of(block_size)
-
-    @story = Story.create!(:title => params[:title])
-    blocks.each_with_index{ |block, i|
-      @story.blocks.create!(:text => block.join(' '), 
-                            :block_number => i)
-    }
+    current_user = User.find_by_first_name('Nalin')
+    @story = Story.create_with_blocks(current_user, params[:title], params[:text])
     render_success({"story" => @story})
   end
 end
