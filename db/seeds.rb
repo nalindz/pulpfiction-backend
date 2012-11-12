@@ -5,20 +5,23 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
-@story = Story.create(:title => "Meow")
 #Block.create!(:story_id => @story.id, :block_number => 0, :text => "The cat likes us, however there are things that you need to know about the cat, for example")
 #Block.create!(:story_id => @story.id, :block_number => 1, :text => "the cat is a heavy drinker, and has been found to be friends with a sheep who's reputation does indeed")
 #Block.create!(:story_id => @story.id, :block_number => 2, :text => "proceed himself. An irish sheep, known by the name of sheepa is a dangerous sheep to say the least. But his biggest")
 #Block.create!(:story_id => @story.id, :block_number => 3, :text => "threat is to himself.")
 #
-Block.create!(:story => @story, :block_number => 0, :text => "The cat likes us, however there are things that you need to know about the cat, for example")
-Block.create!(:story => @story, :block_number => 1, :text => "the cat is a heavy drinker, and has been found to be friends with a sheep who's reputation does indeed")
-Block.create!(:story => @story, :block_number => 2, :text => "proceed himself. An irish sheep, known by the name of sheepa is a dangerous sheep to say the least. But his biggest")
-Block.create!(:story => @story, :block_number => 3, :text => "threat is to himself.")
-
 
 @nalin = User.create(:first_name => "Nalin",
                      :last_name => "De Zoysa")
+
+
+first_story = "The cat likes us, however there are things that you need to know about the cat, for example
+ the cat is a heavy drinker, and has been found to be friends with a sheep who's reputation does indeed
+ proceed himself. An irish sheep, known by the name of sheepa is a dangerous sheep to say the least. But his biggest
+ threat is to himself."
+
+@story = Story.create_with_blocks(:title => "Meow", :text => first_story, :user => @nalin)
+
 
 @story2 = Story.create_with_blocks(:title => "Meow again",
                                    :text => "You've got your ball 
