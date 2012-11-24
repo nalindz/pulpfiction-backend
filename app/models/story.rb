@@ -4,7 +4,7 @@ class Story < ActiveRecord::Base
   has_many :blocks
 
   def self.create_with_blocks(params = {})
-    params = params.reverse_merge({:block_size => 10})
+    params = params.reverse_merge({:block_size => 100})
     story = Story.create!(:title => params[:title], :user => params[:user])
     blocks = params[:text].split(/ +/).in_groups_of(params[:block_size])
     blocks.each_with_index{ |block, i|
