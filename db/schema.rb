@@ -11,16 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111224835) do
+ActiveRecord::Schema.define(:version => 20121124050257) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "story_id"
     t.integer  "block_number"
-    t.string   "text"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
     t.boolean  "first_block",  :default => false
     t.boolean  "last_block",   :default => false
+    t.text     "text"
   end
 
   add_index "blocks", ["block_number"], :name => "index_blocks_on_block_number"
