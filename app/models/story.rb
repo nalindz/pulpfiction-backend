@@ -2,6 +2,7 @@ class Story < ActiveRecord::Base
   attr_accessible :user, :title
   belongs_to :user
   has_many :blocks
+  has_many :tags
 
   include Tire::Model::Search
   include Tire::Model::Callbacks
