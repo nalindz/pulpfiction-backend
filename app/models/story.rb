@@ -3,6 +3,9 @@ class Story < ActiveRecord::Base
   belongs_to :user
   has_many :blocks
 
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
   def self.create_with_blocks(params = {})
     params = params.reverse_merge({:block_size => 100})
     story = Story.create!(:title => params[:title], :user => params[:user])

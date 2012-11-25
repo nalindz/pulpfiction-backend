@@ -6,7 +6,12 @@ class StoriesController < ApplicationController
   end
 
   def index
-    @stories = Story.all
+
+    if (params['query'].nil?)
+      @stories = Story.all
+    else 
+      @stories = Story.search(params['query'])
+    end
     render_success(@stories.map {|s| {:story => s}})
   end
 end
