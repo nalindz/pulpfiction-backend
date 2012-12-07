@@ -11,16 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121125221846) do
+ActiveRecord::Schema.define(:version => 20121207074212) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "story_id"
     t.integer  "block_number"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.boolean  "first_block",  :default => false
-    t.boolean  "last_block",   :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.boolean  "first_block",       :default => false
+    t.boolean  "last_block",        :default => false
     t.text     "text"
+    t.integer  "total_start_index"
   end
 
   add_index "blocks", ["block_number"], :name => "index_blocks_on_block_number"
@@ -34,9 +35,10 @@ ActiveRecord::Schema.define(:version => 20121125221846) do
 
   create_table "stories", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "title"
+    t.integer  "total_length"
   end
 
   create_table "tags", :force => true do |t|
