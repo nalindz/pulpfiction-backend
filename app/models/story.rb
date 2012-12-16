@@ -1,15 +1,17 @@
 class Story < ActiveRecord::Base
-  attr_accessible :user, :title
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
+
+  attr_accessible :user, :title, :cover_image
   belongs_to :user
   has_many :blocks
   has_many :tags
 
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  mount_uploader :cover_image, CoverUploader
 
   def self.create_with_blocks(params = {})
+    story = Story.create!(params.except :text)
     params = params.reverse_merge({:block_size => 100})
-    story = Story.create!(:title => params[:title], :user => params[:user])
     blocks = params[:text].split(/ +/).in_groups_of(params[:block_size])
     total_start_index = 0
     blocks.each_with_index{ |block, i|
@@ -31,7 +33,8 @@ class Story < ActiveRecord::Base
 
   def as_json(options={})
     self.attributes.merge({
-      blocks_count: blocks.count
+      blocks_count: blocks.count, # TODO: counter_cache
+      cover_url: Rails.configuration.base_url + cover_image.url
     })
   end
 end

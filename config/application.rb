@@ -58,5 +58,6 @@ module Bookapp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.base_url = 'http://0.0.0.0:3000/'
   end
 end

@@ -34,4 +34,5 @@ Bookapp::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  config.base_url = "http://0.0.0.0:3000"
 end
