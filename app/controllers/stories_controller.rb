@@ -14,6 +14,11 @@ class StoriesController < ApplicationController
     end
   end
 
+  def update
+    @story = Story.update(params[:id], tags: params[:story][:tags])
+    render_success story: @story
+  end
+
   def render_feed_stories
     if (params['query'].nil?)
       @stories = Story.all

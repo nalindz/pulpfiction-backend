@@ -2,10 +2,9 @@ class Story < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  attr_accessible :user, :title, :cover_image
+  attr_accessible :user, :title, :cover_image, :tags
   belongs_to :user
   has_many :blocks
-  has_many :tags
 
   mount_uploader :cover_image, CoverUploader
 
@@ -35,7 +34,6 @@ class Story < ActiveRecord::Base
     self.attributes.merge({
       blocks_count: blocks.count, # TODO: counter_cache
       cover_url: Rails.configuration.base_url + cover_image.url,
-      tags: tags
     })
   end
 end
