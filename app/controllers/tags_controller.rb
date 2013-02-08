@@ -2,10 +2,14 @@ class TagsController < ApplicationController
   def create
     @story = Story.find(params[:story_id])
     @old_taglist = @story.tags
-    old_taglist_text = @old_taglist.map {|t| t.text}
+    if @old_taglist
+      old_taglist_text = @old_taglist.map {|t| t.text}
+    else 
+      old_taglist_text = []
+    end
 
 
-    @new_taglist = params[:tag_list];
+    @new_taglist = params[:tag];
     new_taglist_text = @new_taglist.map {|t| t[:text]}
 
     @tags_to_add = @new_taglist.reject{|t| old_taglist_text.include? t[:text]}

@@ -34,7 +34,8 @@ class Story < ActiveRecord::Base
   def as_json(options={})
     self.attributes.merge({
       blocks_count: blocks.count, # TODO: counter_cache
-      cover_url: Rails.configuration.base_url + cover_image.url
+      cover_url: Rails.configuration.base_url + cover_image.url,
+      tags: tags
     })
   end
 end
