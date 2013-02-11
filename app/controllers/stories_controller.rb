@@ -21,7 +21,7 @@ class StoriesController < ApplicationController
 
   def render_feed_stories
     if (params['query'].nil?)
-      @stories = Story.all
+      @stories = Story.all # TODO this needs to be fixed with some feed logic
     else 
       @stories = Story.search(params['query'])
     end
@@ -31,6 +31,7 @@ class StoriesController < ApplicationController
   def render_profile_stories
     current_user = User.find_by_first_name('Nalin') # hack
     @stories = current_user.stories
+    @stories = @stories.search(params['query']) unless params['query'].nil?
     render_success(@stories.map {|s| {:story => s}})
   end
 end
