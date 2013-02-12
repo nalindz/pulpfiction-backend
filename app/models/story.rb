@@ -5,6 +5,7 @@ class Story < ActiveRecord::Base
   attr_accessible :user, :title, :cover_image, :tags
   belongs_to :user
   has_many :blocks
+  has_many :bookmarks
 
   mount_uploader :cover_image, CoverUploader
 

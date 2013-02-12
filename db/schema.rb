@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208075456) do
+ActiveRecord::Schema.define(:version => 20130212035127) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "story_id"
@@ -26,11 +26,13 @@ ActiveRecord::Schema.define(:version => 20130208075456) do
 
   add_index "blocks", ["block_number"], :name => "index_blocks_on_block_number"
 
-  create_table "histories", :force => true do |t|
-    t.integer  "story_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "bookmarks", :force => true do |t|
     t.integer  "user_id"
+    t.integer  "story_id"
+    t.integer  "page_number"
+    t.integer  "font_size"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "stories", :force => true do |t|

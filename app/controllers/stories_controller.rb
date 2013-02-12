@@ -11,6 +11,8 @@ class StoriesController < ApplicationController
       render_feed_stories
     elsif (type == 'profile')
       render_profile_stories
+    elsif (type == 'bookmarks')
+      render_bookmarked_stories
     end
   end
 
@@ -29,9 +31,14 @@ class StoriesController < ApplicationController
   end
 
   def render_profile_stories
-    current_user = User.find_by_first_name('Nalin') # hack
     @stories = current_user.stories
     @stories = @stories.search(params['query']) unless params['query'].nil?
     render_success(@stories.map {|s| {:story => s}})
   end
+
+  def render_bookmarked_stories
+    @stories = current_user.bookmarks.map {|b| b.story }
+    render_success(@stories.map {|s| {:story => s}})
+  end
 end
+

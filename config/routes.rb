@@ -6,5 +6,5 @@ Bookapp::Application.routes.draw do
     resource :tags
   end
 
-  resource :history
+  resources :bookmarks
 end
