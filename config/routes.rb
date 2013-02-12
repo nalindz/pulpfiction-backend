@@ -3,8 +3,9 @@ Bookapp::Application.routes.draw do
 
   resources :stories do
     resources :blocks
+    resource :bookmarks
     resource :tags
   end
 
-  resources :bookmarks
+  resource :bookmarks
 end

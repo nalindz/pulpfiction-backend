@@ -37,7 +37,7 @@ class StoriesController < ApplicationController
   end
 
   def render_bookmarked_stories
-    @stories = current_user.bookmarks.map {|b| b.story }
+    @stories = current_user.bookmarks.order("updated_at DESC").map {|b| b.story }
     render_success(@stories.map {|s| {:story => s}})
   end
 end
