@@ -27,7 +27,8 @@ class StoriesController < ApplicationController
     else 
       @stories = Story.search(params['query'])
     end
-    render_success(@stories.map {|s| {:story => s}})
+    render_stories(@stories)
+#    render_success(@stories.map {|s| {:story => s}})
   end
 
   def render_profile_stories
@@ -39,6 +40,10 @@ class StoriesController < ApplicationController
   def render_bookmarked_stories
     @stories = current_user.bookmarks.order("updated_at DESC").map {|b| b.story }
     render_success(@stories.map {|s| {:story => s}})
+  end
+
+  def render_stories(stories)
+    render_success @stories.map {|s| {story: s.as_json({current_user: current_user})}}
   end
 end
 

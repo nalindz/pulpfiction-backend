@@ -32,9 +32,14 @@ class Story < ActiveRecord::Base
 
 
   def as_json(options={})
-    self.attributes.merge({
+    json = self.attributes.merge({
       blocks_count: blocks.count, # TODO: counter_cache
       cover_url: Rails.configuration.base_url + cover_image.url,
+      user: user
     })
+    if options[:current_user]
+      json = json.merge({ "bookmark" => bookmarks.find_by_user_id(options[:current_user].id)})
+    end
+      json
   end
 end

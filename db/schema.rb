@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212035127) do
+ActiveRecord::Schema.define(:version => 20130222055037) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "story_id"
@@ -37,12 +37,27 @@ ActiveRecord::Schema.define(:version => 20130212035127) do
 
   create_table "stories", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
     t.string   "title"
     t.integer  "total_length"
     t.string   "cover_image"
     t.string   "tags"
+    t.integer  "views_count",  :default => 0
+  end
+
+  create_table "story_views", :force => true do |t|
+    t.integer  "story_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_auths", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "password"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -52,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130212035127) do
     t.string   "facebook_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "username"
   end
 
 end
