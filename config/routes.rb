@@ -7,4 +7,5 @@ Bookapp::Application.routes.draw do
     resource :story_views, :path => "view" , :only => [:create]
   end
 
+  resource :login
 end

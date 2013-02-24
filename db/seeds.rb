@@ -2,7 +2,11 @@
 
 @users = []
 @usernames.each do |username|
-  @users << User.create!(username: username)
+  @users << user = User.create!(username: username)
+  if username == 'jellosea'
+    user.facebook_id = 122615609
+    user.save!
+  end
 end
 
 @story_titles = ['We belong together', 
