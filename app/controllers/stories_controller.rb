@@ -23,12 +23,11 @@ class StoriesController < ApplicationController
 
   def render_feed_stories
     if (params['query'].nil?)
-      @stories = Story.all # TODO this needs to be fixed with some feed logic
+      @stories = Story.offset(params[:offset]).limit(params[:limit])
     else 
-      @stories = Story.search(params['query'])
+      @stories = Story.search(params['query']).offset(params[:offset]).limit(params[:limit])
     end
     render_stories(@stories)
-#    render_success(@stories.map {|s| {:story => s}})
   end
 
   def render_profile_stories

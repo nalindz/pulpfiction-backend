@@ -34,7 +34,7 @@ class Story < ActiveRecord::Base
   def as_json(options={})
     json = self.attributes.merge({
       blocks_count: blocks.count, # TODO: counter_cache
-      cover_url: Rails.configuration.base_url + cover_image.url,
+      cover_url: cover_image.url.nil? ? '' : Rails.configuration.base_url + cover_image.url,
       user: user
     })
     if options[:current_user]
