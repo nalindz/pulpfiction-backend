@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
   has_many :bookmarks
   after_create :assign_username
 
-#  validates :name, :length => { :within => 3..15
-#                                :too_short => "TOO_SHORT"
-#                                :too_long => "TOO_LONG" }
+  validates :username, 
+    :length => { :within => 3..15,
+    :too_short => "TOO_SHORT",
+    :too_long => "TOO_LONG" }
 
   def assign_username
+    return if first_name.blank?
     base_username = first_name[0] + last_name
     suffix_number = ''
 

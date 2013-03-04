@@ -20,7 +20,8 @@ class ApplicationController < ActionController::Base
   def render_error(status, error_message = nil)
     error_code = { 
       :forbidden => {:code => 403, :description => "Unauthorized"},
-      :server_error => {:code => 500, :description => "Internal Server Error"}
+      :server_error => {:code => 500, :description => "Internal Server Error"},
+      :unprocessable_entity => {:code => 422, :description => "Unprocessable Entity"}
     }   
     error_obj = error_code[status]
     error_obj[:description] = error_message unless error_message.blank?
