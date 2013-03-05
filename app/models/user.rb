@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   validates :username, 
     :length => { :within => 3..15,
     :too_short => "TOO_SHORT",
-    :too_long => "TOO_LONG" }
+    :too_long => "TOO_LONG" },
+    :format => { :with => /^([a-zA-Z]([._]?[a-zA-Z0-9]+)*[._]?|[._]([a-zA-Z0-9]+[._]?)*)$/,
+      :message => "INVALID_CHARS" }
 
   def assign_username
     return if first_name.blank?
