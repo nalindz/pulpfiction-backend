@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def update
     @user.username = params[:user][:username]
     if @user.valid?
+      @user.confirmed_username = true
       @user.save!
       render_success user: @user
     else

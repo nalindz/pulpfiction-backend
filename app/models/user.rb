@@ -1,8 +1,10 @@
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :facebook_id, :email, :username
+  attr_accessible :first_name, :last_name, :facebook_id, :email, :username, :state
   has_many :stories
   has_many :bookmarks
   after_create :assign_username
+
+  include UserState
 
   validates :username, 
     :length => { :within => 3..15,
@@ -24,6 +26,7 @@ class User < ActiveRecord::Base
     self.username = base_username + suffix_number
     save!
   end
+
 
   # note: not using this stuff yet
   def self.authenticate(username, password, salt='salt')
