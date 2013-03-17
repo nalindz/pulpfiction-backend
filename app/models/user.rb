@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :facebook_id, :email, :username, :state
   has_many :stories
   has_many :bookmarks
-  after_create :assign_username
+#  before_create :assign_username
 
   include UserState
 

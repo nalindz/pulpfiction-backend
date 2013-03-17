@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   #before_filter :logged_in_required 
 
   def current_user
-#    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    @current_user = User.find_by_username('jellosea')
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+#    @current_user = User.find_by_username('jellosea')
   end 
 
   def logged_in_required

@@ -71,7 +71,14 @@ GEM
       mail (>= 2.0.3)
       maildir (>= 0.5.0)
     mime-types (1.19)
+    mongoid (3.1.2)
+      activemodel (~> 3.2)
+      moped (~> 1.4.2)
+      origin (~> 1.0)
+      tzinfo (~> 0.3.22)
+    moped (1.4.3)
     multi_json (1.3.6)
+    origin (1.0.11)
     pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -154,6 +161,7 @@ DEPENDENCIES
   jquery-rails
   json
   mailman
+  mongoid
   pg
   rails (= 3.2.8)
   rspec-rails

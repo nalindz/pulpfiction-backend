@@ -1,10 +1,8 @@
-@usernames = ['hellomeow', 'jellosea', 'audiomimiC2001', 'phoenix', 'touchmyBody', 'anotherUser']
+@usernames = ['hellomeow', 'jellosea', 'audiomimiC', 'phoenix', 'touchmyBody', 'anotherUser']
 
 @users = []
 @usernames.each do |username|
-  @users << user = User.create!(first_name: 'meow', last_name: 'zilla')
-  user.username = username
-  user.save!
+  @users << user = User.create!(first_name: 'meow', last_name: 'zilla', username: username)
 #  if username == 'jellosea'
 #    user.facebook_id = 122615609
 #    user.save!

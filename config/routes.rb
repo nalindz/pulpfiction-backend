@@ -9,4 +9,5 @@ Bookapp::Application.routes.draw do
   resources :blocks, :only => [:index]
 
   resource :login
+  resource :logs, :only => [:create]
 end
