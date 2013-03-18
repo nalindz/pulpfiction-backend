@@ -9,8 +9,8 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    puts params.inspect
-    @bookmark = current_user.bookmarks.find_by_story_id(params[:story_id]).destroy
+    puts 'meow', params.inspect
+    @bookmark = current_user.bookmarks.where(story_id: params[:story_id]).destroy_all
     render_success
   end
 end

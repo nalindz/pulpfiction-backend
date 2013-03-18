@@ -23,9 +23,9 @@ class StoriesController < ApplicationController
 
   def render_feed_stories
     if (params['query'].nil?)
-      @stories = Story.offset(params[:offset]).limit(params[:limit])
+      @stories = Story.paginate(page: params[:page], per_page: 18)
     else 
-      @stories = Story.search(params['query']).offset(params[:offset]).limit(params[:limit])
+      @stories = Story.search params['query'], page: params[:page], per_page: 18
     end
     render_stories(@stories)
   end
