@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
     :too_short => "TOO_SHORT",
     :too_long => "TOO_LONG" },
     :format => { :with => /^([a-zA-Z]([._]?[a-zA-Z0-9]+)*[._]?|[._]([a-zA-Z0-9]+[._]?)*)$/,
-      :message => "INVALID_CHARS" }
+      :message => "INVALID_CHARS" },
+    :uniqueness => { :message => "ALREADY_TAKEN" }
 
   def assign_username
     return if first_name.blank?
