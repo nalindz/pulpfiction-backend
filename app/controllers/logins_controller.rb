@@ -9,6 +9,6 @@ class LoginsController < ApplicationController
     end
     session[:user_id] = @user.id
     puts @user.inspect
-    render_success user: @user
+    render_success user: @user.as_json({current_user: true})
   end
 end

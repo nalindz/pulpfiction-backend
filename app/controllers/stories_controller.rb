@@ -1,8 +1,16 @@
 class StoriesController < ApplicationController
+  skip_before_filter :logged_in_required, :only => [:create]
   def create
-    current_user = User.find_by_first_name('Nalin')
-    @story = Story.create_with_blocks(current_user, params[:title], params[:text])
-    render_success({:story => @story})
+    user = User.find_by_username(params[:username])
+    return render_error :unprocessable_entity, "no user found" if user.nil? 
+    return render_error :unprocessable_entity, "incorrect email hash" if user.email_hash.hash_text != params[:email_hash]
+    return render_error :unprocessable_entity, "no title" if params[:title].nil?
+    return render_error :unprocessable_entity, "no text" if params[:text].nil?
+
+    @story = Story.create_with_blocks(user: user, 
+                                      title: params[:title], 
+                                      text: params[:text])
+    render_success
   end
 
   def index

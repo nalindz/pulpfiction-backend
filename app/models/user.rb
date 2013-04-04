@@ -2,7 +2,8 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :facebook_id, :email, :username, :state
   has_many :stories
   has_many :bookmarks
-#  before_create :assign_username
+  has_one :email_hash, :class_name => "UserEmailHash"
+  after_create :assign_email_hash
 
   include UserState
 
@@ -24,8 +25,14 @@ class User < ActiveRecord::Base
       suffix_number = (suffix_number.to_i + 1).to_s
     end
 
-    self.username = base_username + suffix_number
+    self.username = base_username.downcase + suffix_number
     save!
+  end
+
+  def assign_email_hash
+    o = [('a'..'z')].map{|i| i.to_a}.flatten
+    string = (0..3).map{ o[rand(o.length)] }.join
+    UserEmailHash.create!(user_id: id, hash_text: string)
   end
 
 
@@ -36,5 +43,13 @@ class User < ActiveRecord::Base
     hashed_password =  Digest::MD5.hexdigest(password + salt)
     return @user if @user.user_auth.password == hashed_password
     false
+  end
+
+  def as_json(options={})
+    json = self.attributes
+    if options[:current_user]
+      json = json.merge({ "email_hash" => email_hash.hash_text})
+    end
+    json
   end
 end
