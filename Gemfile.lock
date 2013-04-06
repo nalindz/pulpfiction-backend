@@ -50,6 +50,7 @@ GEM
     factory_girl_rails (4.1.0)
       factory_girl (~> 4.1.0)
       railties (>= 3.0.0)
+    god (0.13.2)
     hashr (0.0.22)
     hike (1.2.1)
     i18n (0.6.1)
@@ -159,12 +160,14 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   factory_girl
   factory_girl_rails
+  god
   jquery-rails
   json
   mailman
   mongoid
   pg
   rails (= 3.2.8)
+  rest-client
   rspec-rails
   sass-rails (~> 3.2.3)
   sqlite3

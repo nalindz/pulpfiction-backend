@@ -3,6 +3,7 @@ require 'mailman'
 require 'textractor'
 require 'net/http'
 require 'uri'
+require 'rest_client'
 
 
 Mailman.config.pop3 = {
@@ -19,30 +20,41 @@ Mailman.config.poll_interval = 4
 server_url = "http://0.0.0.0:3000/"
 Mailman::Application.run do
   to '%username%+%hash%@pulpfictionapp.com' do |username, hash|
+    begin
     message.attachments.each { |attachment|
       if  File.extname(attachment.filename) == ".txt"
-        text = attachment.body.decoded
+        @text = attachment.body.decoded
+        @title = File.basename(attachment.filename, File.extname(attachment.filename)) if @title.nil?
       elsif  File.extname(attachment.filename) == ".docx"
         File.delete(attachment.filename) if File.exists?(attachment.filename)
         File.open(attachment.filename, "w+b", 0644) {|f| f.write attachment.body.decoded}
-        text = Textractor.text_from_path(attachment.filename)
-        text = text.gsub(/&quot;/, "'")
+        @text = Textractor.text_from_path(attachment.filename)
+        @text = @text.gsub(/&quot;/, "'")
         File.delete(attachment.filename)
+        @title = File.basename(attachment.filename, File.extname(attachment.filename)) if @title.nil?
+      elsif  File.extname(attachment.filename) == ".jpg" ||
+             File.extname(attachment.filename) == ".png" ||
+             File.extname(attachment.filename) == ".jpeg"
+        File.delete(attachment.filename) if File.exists?(attachment.filename)
+        File.open(attachment.filename, "w+b", 0644) {|f| f.write attachment.body.decoded}
+        @cover_image = File.new(attachment.filename, 'rb')
       end
-
-      title = File.basename(attachment.filename, File.extname(attachment.filename))
-
-
-      res = Net::HTTP.post_form(URI.parse("#{server_url}/stories"),
-                                {title: title, username: username, email_hash: hash, text: text})
-      puts res.body
-
-
-
-#      Story.create_with_blocks(:title => File.basename(attachment.filename, 
-#                                                       File.extname(attachment.filename)),
-#                                                       :text => text,
-#                                                       :user => user)
     }
+
+
+      res = RestClient.post "#{server_url}/stories", {title: @title, 
+                                                username: username, 
+                                                email_hash: hash, 
+                                                text: @text,
+                                                cover_image: @cover_image }
+      @title = nil
+      @text = nil
+      @cover_image = nil
+      puts res
+    rescue SignalException
+      raise
+    rescue Exception => e
+      puts e
+    end
   end
 end

@@ -9,7 +9,8 @@ class StoriesController < ApplicationController
 
     @story = Story.create_with_blocks(user: user, 
                                       title: params[:title], 
-                                      text: params[:text])
+                                      text: params[:text],
+                                      cover_image: params[:cover_image])
     render_success
   end
 
