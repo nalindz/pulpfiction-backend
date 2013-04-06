@@ -17,7 +17,7 @@ Mailman.config.pop3 = {
 
 Mailman.config.poll_interval = 4
 
-server_url = "http://0.0.0.0:3000/"
+server_url = "http://bookapp-stage.herokuapp.com/"
 Mailman::Application.run do
   to '%username%+%hash%@pulpfictionapp.com' do |username, hash|
     begin
