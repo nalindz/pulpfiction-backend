@@ -31,4 +31,6 @@ gem 'mongoid'
 gem 'will_paginate'
 gem 'rest-client'
 gem 'god'
-gem 'fog', '~> 1.0.0'
+gem 'multi_json'
+gem 'fog'
+
