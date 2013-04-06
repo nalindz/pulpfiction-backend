@@ -81,6 +81,7 @@ test:
 production:
     sessions:
       default:
+        database: analytics
         uri: <%= ENV['MONGOLAB_URI'] %>
       options:
         skip_version_check: true
