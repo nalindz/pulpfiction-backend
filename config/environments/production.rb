@@ -65,4 +65,5 @@ Bookapp::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.base_url = "http://bookapp-stage.heroku.com"
+  config.serve_static_assets = true
 end
