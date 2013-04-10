@@ -16,17 +16,17 @@ class StoriesController < ApplicationController
 
   def index
     type = params['type']
-    if (type == 'feed') 
+    if type == 'feed' 
       render_feed_stories
-    elsif (type == 'profile')
+    elsif type == 'profile'
       render_profile_stories
-    elsif (type == 'bookmarks')
+    elsif type == 'bookmarks'
       render_bookmarked_stories
     end
   end
 
   def update
-    @story = Story.update(params[:id], tags: params[:story][:tags])
+    @story = Story.update(params[:id], tags: params[:story][:tags], title: params[:story][:title])
     render_success story: @story
   end
 
@@ -36,6 +36,7 @@ class StoriesController < ApplicationController
     else 
       @stories = Story.search params['query'], page: params[:page], per_page: 18
     end
+    puts @stories.inspect
     render_stories(@stories)
   end
 
@@ -46,8 +47,10 @@ class StoriesController < ApplicationController
   end
 
   def render_bookmarked_stories
-    @stories = current_user.bookmarks.order("updated_at DESC").map {|b| b.story }
-    render_success(@stories.map {|s| {:story => s}})
+    @stories = current_user.bookmarks.order("updated_at DESC").map { |b| b.story unless b.story.nil? }
+    puts @stories.reject! {|s| s.nil? }
+    puts @stories.map {|s| {story: s}}.as_json
+    render_success @stories.map {|s| {story: s}}
   end
 
   def render_stories(stories)

@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
   has_many :stories
   has_many :bookmarks
   has_one :email_hash, :class_name => "UserEmailHash"
+  has_one :stat, :class_name => "UserStat"
   after_create :assign_email_hash
+  after_create :create_user_stat
 
   include UserState
 
@@ -35,6 +37,9 @@ class User < ActiveRecord::Base
     UserEmailHash.create!(user_id: id, hash_text: string)
   end
 
+  def create_user_stat
+    self.stat.create!
+  end
 
   # note: not using this stuff yet
   def self.authenticate(username, password, salt='salt')
@@ -48,7 +53,8 @@ class User < ActiveRecord::Base
   def as_json(options={})
     json = self.attributes
     if options[:current_user]
-      json = json.merge({ "email_hash" => email_hash.hash_text})
+      json = json.merge({"email_hash" => email_hash.hash_text,
+                        "stat" => stat})
     end
     json
   end

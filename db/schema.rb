@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130404040434) do
+ActiveRecord::Schema.define(:version => 20130410201217) do
 
   create_table "blocks", :force => true do |t|
     t.integer  "story_id"
@@ -35,15 +35,18 @@ ActiveRecord::Schema.define(:version => 20130404040434) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "bookmarks", ["story_id"], :name => "index_bookmarks_on_story_id"
+
   create_table "stories", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at",                  :null => false
-    t.datetime "updated_at",                  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.string   "title"
     t.integer  "total_length"
     t.string   "cover_image"
     t.string   "tags"
-    t.integer  "views_count",  :default => 0
+    t.integer  "views_count",     :default => 0
+    t.integer  "bookmarks_count", :default => 0
   end
 
   create_table "story_views", :force => true do |t|
@@ -67,6 +70,16 @@ ActiveRecord::Schema.define(:version => 20130404040434) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "user_stats", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "own_stories_views",       :default => 0
+    t.integer  "own_stories_bookmarks",   :default => 0
+    t.integer  "total_stories_views",     :default => 0
+    t.integer  "total_stories_bookmarks", :default => 0
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -77,5 +90,7 @@ ActiveRecord::Schema.define(:version => 20130404040434) do
     t.string   "username"
     t.integer  "state",       :default => 0
   end
+
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end
