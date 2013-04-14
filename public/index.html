@@ -171,8 +171,17 @@
         font-style: italic;
       }
     </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/assets/jquery.fitvids.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#meow").fitVids();
+      });
+    </script>
   </head>
   <body>
-    <p>touch by body</p>
+    <div id="meow">
+<iframe src="http://player.vimeo.com/video/63981777" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
   </body>
 </html>

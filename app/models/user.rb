@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
 
   def create_user_stat
-    self.stat.create!
+    UserStat.create!(user: self)
   end
 
   # note: not using this stuff yet

@@ -1,7 +1,16 @@
 class UsersController < ApplicationController
-  before_filter :load_user
+  before_filter :load_user, :only => [:update]
   def index
-    render_success user: @user
+    if params[:id].nil?
+      render_success user: current_user.as_json(current_user: true)
+    else
+      @user = User.find_by_id(params[:id])
+      if @user.present?
+        render_success user: @user
+      else
+        render_error
+      end
+    end
   end
 
   def update

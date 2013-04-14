@@ -1,4 +1,4 @@
-@usernames = ['hellomeow', 'jellosea', 'audiomimiC', 'phoenix', 'touchmyBody', 'anotherUser']
+@usernames = ['hellomeow', 'jellosea', 'audiomimic', 'phoenix', 'azmanian', 'anotherUser']
 
 @users = []
 @usernames.each do |username|
@@ -9,33 +9,42 @@
 #  end
 end
 
-@story_titles = ['We belong together', 
-                 'Boulevard of Broken Dreams',
+@story_titles = ['Key To The Highway', 
+                 'Riding With The King',
                  '50 Shades of Meow',
                  'The Hunger Meows',
-                 'The Third Wheel (Diary of a cat)',
+                 'Say Anything',
                  'A Song of Fire and Meow',
-                 'Proof of Heaven',
+                 'Around The World',
                  'Hate it or Love it',
-                 'Touch My Body: Dizitial']
+                 'Message in a Bottle',
+                 'Surviving the Times',
+                 'Television Rules The Nation']
 
 @tags = ['comedy', 
   'romance', 
+  'anotherTag', 
   'wtf', 
   'mystery', 
   'TwistAtTheEnd', 
-  'NewShit', 
   'oldschool', 
-  'gpoetry',
+  'neoPoetry',
+  'experimental',
   'chickLit',
-  'saxy',
   'newschool']
 
+@stories = []
+@images = []
 for i in 1..21 do
-  story_text = IO.read("seeds/story#{i}.txt")
+  @stories << IO.read("seeds/story#{i}.txt")
+  @images << File.open("seeds/images/#{i}.jpg")
+end
+
+for i in 1..21 do
+  story_text = @stories.sample
   @story = Story.create_with_blocks(:title => @story_titles.sample,
                                     :text => story_text, 
                                     :tags => @tags.sample(rand(3) + 3).map{ |t| '#' + t}.join(' '),
-                                    :cover_image => File.open("seeds/images/#{i}.jpg"),
+                                    :cover_image => @images[i],
                                     :user => @users.sample)
 end

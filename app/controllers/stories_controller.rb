@@ -32,9 +32,9 @@ class StoriesController < ApplicationController
 
   def render_feed_stories
     if (params['query'].nil?)
-      @stories = Story.paginate(page: params[:page], per_page: 18)
+      @stories = Story.paginate(page: params[:page], per_page: 27)
     else 
-      @stories = Story.search params['query'], page: params[:page], per_page: 18
+      @stories = Story.search params['query'], page: params[:page], per_page: 27
     end
     puts @stories.inspect
     render_stories(@stories)
