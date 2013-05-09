@@ -20,6 +20,13 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
       </script>
     <![endif]-->
+    <link rel="stylesheet" href="assets/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+    </script>
+    <script src="assets/bootstrap.js">
+    </script>
+    <script src="/assets/jquery.prettyPhoto.js">
+    </script>
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="assets/ico/favicon.ico">
     <!-- <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
@@ -46,7 +53,7 @@
         <div class="jumbotron">
           <h1 class="" id="tagline">Showcasing the best in Fiction</h1>
           <img src="assets/screen.png" width="50%" class="" id="render"><p class="lead" id="caption">Pulp Fiction is an online platform for writers to showcase their created content and share it with fiction fans and their peers.&nbsp;</p>
-          <a class="btn btn-success" href="#" id="video_button"><i class="icon-film" style="margin-top: 4px;"></i>&nbsp;See Demo Video<br></a>
+          <a class="btn btn-success" href="http://vimeo.com/63981777" id="video_button" rel="prettyPhoto"><i class="icon-film" style="margin-top: 4px;"></i>&nbsp;See Demo Video<br></a>
         </div>
     
         <hr>
@@ -123,12 +130,13 @@
       }
       
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-    </script>
-    <script src="assets/bootstrap.js">
-    </script>
-    <script>
-
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("a[rel^='prettyPhoto']").prettyPhoto({
+                social_tools: false
+            });
+        });
     </script>
   </body>
 </html>
