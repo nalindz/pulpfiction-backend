@@ -10,4 +10,7 @@ Bookapp::Application.routes.draw do
 
   resource :login
   resource :logs, :only => [:create]
+  
+  match 'faq' => 'sites#faq', :as => :faq
+  root :to => 'sites#index'
 end
