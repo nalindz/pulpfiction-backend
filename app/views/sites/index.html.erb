@@ -15,14 +15,10 @@
       to the bottom of the topbar */ }
     </style>
     <link href="assets/bootstrap-responsive.css" rel="stylesheet">
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
-      </script>
-    <![endif]-->
+    
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600" rel="stylesheet">
     <link rel="stylesheet" href="assets/prettyPhoto.css" type="text/css" media="screen" charset="utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-    </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script src="assets/bootstrap.js">
     </script>
     <script src="/assets/jquery.prettyPhoto.js">
@@ -51,9 +47,48 @@
         <hr class="">
     
         <div class="jumbotron">
-          <h1 class="" id="tagline">Showcasing the best in Fiction</h1>
-          <img src="assets/screen.png" width="50%" class="" id="render"><p class="lead" id="caption">Pulp Fiction is an online platform for writers to showcase their created content and share it with fiction fans and their peers.&nbsp;</p>
-          <a class="btn btn-success" href="http://vimeo.com/63981777" id="video_button" rel="prettyPhoto"><i class="icon-film" style="margin-top: 4px;"></i>&nbsp;See Demo Video<br></a>
+          <h1 class="" id="tagline">Discover New Writing in a New Way</h1>
+          <p style="padding-bottom: 20px;"><a href="https://www.youtube.com/watch?v=zwJeCijimv4&hd=1" rel="prettyPhoto" class="btn btn-primary btn-large">View Demo</a></p>
+
+          <div id="myCarousel" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">                 
+                    <p>
+                        <img src="assets/pf-screen-home.jpg" alt="home" style="width: 40%"/>                     
+                    </p>         
+                    <article class="carousel-caption">                                         
+                        <h3>View all the latest stories in a rich & intuitive feed</h3>
+                        <p class="center-align">Read something amazing & Discover new favorite Writers.</p>  
+                    </article>                                        
+                </div>
+                <div class="item">      
+                    <p>                           
+                        <img src="assets/pf-screen-read.jpg" alt="read" style="width: 40%"/>          
+                    </p>           
+                    <article class="carousel-caption">                  
+                        <h3>Read stories in a clean, distraction free reader</h3>       
+                        <p class="center-align">Bookmark stories to save for later, and pickup where you left off.</p>                                                   
+                    </article>
+                </div>
+                <div class="item">                  
+                    <p>                                           
+                        <img src="assets/pf-screen-profile.jpg" alt="profile" style="width: 40%"/>          
+                    </p>      
+                    <article class="carousel-caption">                        
+                        <h3>Tag to classify your uploads and view statistics</h3>       
+                        <p class="center-align">From cover art to hashtag classification, showcase your content, your way! </p>                            
+                    </article>
+                </div>
+               
+            </div> 
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>           
+        </div> 
+
+        <!-- <a href="https://www.youtube.com/watch?v=zwJeCijimv4&hd=1" rel="prettyPhoto" class="big-btn">View Demo</a> -->
+
+
+          <!-- <a class="btn btn-success" href="https://www.youtube.com/watch?v=zwJeCijimv4&hd=1" id="video_button" rel="prettyPhoto"><i class="icon-film" style="margin-top: 4px;"></i>&nbsp;See Demo Video<br></a> -->
         </div>
     
         <hr>
@@ -109,17 +144,43 @@
       
       /* Main marketing message and sign up button */
       .jumbotron {
-        margin: 60px 0;
+        /*margin: 60px 0;*/
         text-align: center;
       }
       .jumbotron h1 {
-        font-size: 48px;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 36px;
         line-height: 1;
+        padding-bottom: 20px;
       }
       .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
+        font-size: 20px;
+        padding: 12px 24px;
       }
+
+      @media (max-width: 480px) {
+        .jumbotron h1 {
+          font-size: 24px;
+        }
+
+        .jumbotron .btn {
+          font-size: 16px;
+          padding: 8px 14px;
+        }
+
+        h3#topbar {
+          font-size: 24px;
+        }
+
+        .carousel-caption h3 {
+          font-size: 16px;
+        }
+
+        .carousel-caption > p {
+          font-size: 12px;
+        }
+      }
+
       
       /* Supporting marketing content */
       .marketing {
@@ -128,6 +189,32 @@
       .marketing p + h4 {
         margin-top: 28px;
       }
+
+            /*
+      * carousel
+      */
+      .carousel a {
+        color: #ffffff;
+      }
+
+      .carousel .item a { 
+        color: #3799ca;
+      }
+
+      .carousel-caption 
+      {
+        position: static;
+        background: transparent;  
+      }
+
+      .carousel .item > p,
+      .carousel-caption p
+      {   
+        font: 14px/23px 'Open Sans', sans-serif;  
+          text-shadow:#ffffff 0 1px 0;
+        color: #333333;
+        text-align: center;
+      }
       
     </style>
     
@@ -135,6 +222,8 @@
         $(document).ready(function() {
             $("a[rel^='prettyPhoto']").prettyPhoto({
                 theme: 'dark_square',
+                default_width: 640,
+                default_height: 480,
                 deeplinking: false,
                 social_tools: false
             });
