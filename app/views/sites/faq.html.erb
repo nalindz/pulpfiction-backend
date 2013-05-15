@@ -39,8 +39,8 @@
           <ul class="nav nav-pills pull-right">
             <!-- <li class=""><a href="#" class="">Home</a></li> -->
             <li class=""><%= link_to "Home", :action => 'index', :controller => 'sites' %></li>
-            <li class="active"><a href="/faq" class="">FAQ</a></li>
-            <li class=""><a href="#" class="">Contact</a></li>
+            <li class="active"><a href="#" class="">FAQ</a></li>
+            <li class=""><%= link_to "Contact", :action => 'contact', :controller => 'sites' %></li>
           </ul>
           <!-- <h3 class="muted" id="topbar">Pulp Fiction</h3> -->
           <%=link_to image_tag("logo1.png", :width => '25%'), {:action => 'index', :controller => 'sites'} %> 
@@ -141,6 +141,12 @@
     			Pulp Fiction will be available on the App Store very soon!&nbsp;
     		</p>
     	</div>
+
+        <hr class="">
+    
+        <div class="footer">
+          <p class="jetstrap-selected" id="footer">© Pulp Fiction 2013</p>
+        </div>
     	
     </div>
     <!-- /container -->

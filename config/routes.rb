@@ -12,5 +12,6 @@ Bookapp::Application.routes.draw do
   resource :logs, :only => [:create]
   
   match 'faq' => 'sites#faq', :as => :faq
+  match 'contact' => 'sites#contact', :as => :contact
   root :to => 'sites#index'
 end
