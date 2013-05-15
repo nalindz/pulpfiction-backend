@@ -41,7 +41,8 @@
             <li class=""><a href="/faq" class="">FAQ</a></li>
             <li class=""><a href="#" class="">Contact</a></li>
           </ul>
-          <h3 class="muted" id="topbar">Pulp Fiction</h3>
+          <!-- <h3 class="muted" id="topbar">Pulp Fiction</h3> -->
+          <%=link_to image_tag("logo1.png", :width => '35%'), {:action => 'index', :controller => 'sites'} %> 
         </div>
     
         <hr class="">
@@ -168,8 +169,8 @@
           padding: 8px 14px;
         }
 
-        h3#topbar {
-          font-size: 24px;
+        h3#logo {
+          width: 75%;
         }
 
         .carousel-caption h3 {
