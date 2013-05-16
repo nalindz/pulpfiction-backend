@@ -2,7 +2,7 @@ class Story < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  attr_accessible :user, :title, :cover_image, :tags
+  attr_accessible :user, :title, :cover_image, :tags, :views_count, :bookmarks_count
   belongs_to :user
   has_many :blocks
   has_many :bookmarks
