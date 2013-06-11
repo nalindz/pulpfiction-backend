@@ -33,4 +33,5 @@ gem 'rest-client'
 gem 'god'
 gem 'multi_json'
 gem 'fog'
+gem 'google-analytics-rails'
 

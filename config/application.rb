@@ -62,5 +62,17 @@ module Bookapp
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # Rails Mailer for Contact Form
+    config.action_mailer.smtp_settings = {
+        :address              => "smtp.gmail.com",
+        :port                 => 587,
+        :domain               => "pulpfictionapp.com",
+        :user                 => 'pulpfictionapp@gmail.com',
+        :password             => 'thecatsaysmeow',
+        :authentication       => :plain,
+        :enable_starttls_auto => true 
+    }
+    
   end
 end

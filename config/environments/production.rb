@@ -65,4 +65,7 @@ Bookapp::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   config.image_base_url = ''
+
+  # Google Analytics Tracker for GA Rails Gem
+  GA.tracker = "UA-41630524-1"
 end
